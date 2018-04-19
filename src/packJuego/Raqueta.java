@@ -6,7 +6,7 @@ import java.awt.Graphics;
 public class Raqueta {
 
 	private int alto = 100;
-	private int ancho = 25;
+	private int ancho = 20;
 	private int posx;
 	private int altoJuego;
 	private int posy;
