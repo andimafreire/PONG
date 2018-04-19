@@ -42,7 +42,7 @@ public class LoginRegister {
 		usernameLabel.setBounds(10, 10, 80, 25);
 		panel.add(usernameLabel);
 
-		JTextField usernameField = new JTextField(20);
+		final JTextField usernameField = new JTextField(20);
 		usernameField.setBounds(100, 10, 160, 25);
 		panel.add(usernameField);
 
@@ -50,7 +50,7 @@ public class LoginRegister {
 		passwordLabel.setBounds(10, 40, 80, 25);
 		panel.add(passwordLabel);
 
-		JPasswordField passwordField = new JPasswordField(20);
+		final JPasswordField passwordField = new JPasswordField(20);
 		passwordField.setBounds(100, 40, 160, 25);
 		panel.add(passwordField);
 

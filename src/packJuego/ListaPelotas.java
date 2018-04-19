@@ -4,6 +4,8 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import packVentanas.VentanaJuego;
+
 public class ListaPelotas {
 
 	private ArrayList<Pelota> pelotas;
@@ -26,21 +28,22 @@ public class ListaPelotas {
 		}
 	}
 
-	public void eliminarPelota(Pelota pPelota) {
-		if (pelotas.contains(pPelota)) {
-			pelotas.remove(pPelota);
+	public void eliminarPelota(int pId) {
+		pelotas.remove(buscarPelota(pId));
+		if (pelotas.size()<=0) {
+			Pelota p = new Pelota(VentanaJuego.anchura/2, VentanaJuego.altura/2, pId);
+			pelotas.add(p);
 		}
 	}
 
-	public Pelota buscarPelota(Pelota pPelota) {
+	public Pelota buscarPelota(int pId) {
 		boolean found = false;
 		Iterator<Pelota> itr = getIterator();
-		Pelota p = itr.next();
+		Pelota p = null;
 		while (itr.hasNext() && !found) {
-			if (itr.equals(pPelota)) {
+			p = itr.next();
+			if (p.getId() == pId) {
 				found = true;
-			} else {
-				p = itr.next();
 			}
 		}
 		if (found) {

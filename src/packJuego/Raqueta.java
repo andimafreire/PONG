@@ -33,4 +33,14 @@ public class Raqueta {
 		g.setColor(Color.BLACK);
 		g.fillRect(posx, posy, ancho, alto);
 	}
+
+	public int getPosx() {
+		return posx;
+	}
+	public int getPosy() {
+		return posy;
+	}
+	public int getVelocidad() {
+		return velocidad;
+	}
 }
