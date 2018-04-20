@@ -18,7 +18,7 @@ public class VentanaJuego extends Canvas implements Runnable,KeyListener{
 	public final static int anchura = 640;
 	
 	private boolean running = false;
-	private final int fps = 420;
+	private final int fps = 210;
 	private Thread thread;
 	private JFrame frame;
 	
@@ -99,10 +99,10 @@ public class VentanaJuego extends Canvas implements Runnable,KeyListener{
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 		int code = arg0.getKeyCode();
-		if(code == KeyEvent.VK_W) Juego.getJuego().moverJugador2(-2); 
-		if(code == KeyEvent.VK_S)  Juego.getJuego().moverJugador2(2);
-		if(code == KeyEvent.VK_UP) Juego.getJuego().moverJugador1(-2); 
-		if(code == KeyEvent.VK_DOWN) Juego.getJuego().moverJugador1(2);
+		if(code == KeyEvent.VK_W) Juego.getJuego().moverJugador2(-3); 
+		if(code == KeyEvent.VK_S)  Juego.getJuego().moverJugador2(3);
+		if(code == KeyEvent.VK_UP) Juego.getJuego().moverJugador1(-3); 
+		if(code == KeyEvent.VK_DOWN) Juego.getJuego().moverJugador1(3);
 	}
 
 

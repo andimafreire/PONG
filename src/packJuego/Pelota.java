@@ -18,7 +18,7 @@ public class Pelota {
 		id = pId;
 		posx = pPosx;
 		posy = pPosy;
-		radio = 10;
+		radio = 12;
 		angulo = Math.toRadians(0);
 		velx = 1 * Math.cos(angulo);
 		vely = 1 * Math.sin(angulo);
@@ -56,14 +56,14 @@ public class Pelota {
 				if (pRaqueta.getVelocidad() > 0) {
 					if (angulo < Math.toRadians(70)) {
 						angulo = Math.toRadians(angulo+Math.toRadians(20));
-						velx = 7* Math.cos(angulo);
-						vely = 7* Math.sin(angulo);
+						velx = 1* Math.cos(angulo);
+						vely = 1* Math.sin(angulo);
 					}
 				}else if(pRaqueta.getVelocidad() < 0) {
 					if (angulo > Math.toRadians(290)) {
 						angulo = Math.toRadians(angulo-Math.toRadians(20));
-						velx = 7* Math.cos(angulo);
-						vely = 7* Math.sin(angulo);
+						velx = 1* Math.cos(angulo);
+						vely = 1* Math.sin(angulo);
 					}
 				}
 			}else {
@@ -71,15 +71,19 @@ public class Pelota {
 				if (pRaqueta.getVelocidad() > 0) {
 					if (angulo > Math.toRadians(110)) {
 						System.out.println("angulos");
+						System.out.println(angulo);
 						angulo = Math.toRadians(angulo-Math.toRadians(20));
-						velx = 7* Math.cos(angulo);
-						vely = 7* Math.sin(angulo);
+						velx = 1* Math.cos(angulo);
+						vely = 1* Math.sin(angulo);
 					}
 				}else if(pRaqueta.getVelocidad() < 0) {
 					if (angulo < Math.toRadians(250)) {
+						System.out.println("angulos");
+						System.out.println(angulo);
 						angulo = Math.toRadians(angulo+Math.toRadians(20));
-						velx = 7* Math.cos(angulo);
-						vely = 7* Math.sin(angulo);
+						System.out.println(angulo);
+						velx = 1* Math.cos(angulo);
+						vely = 1* Math.sin(angulo);
 					}
 				}
 			}
@@ -87,16 +91,16 @@ public class Pelota {
 	}
 
 	private boolean colision(Raqueta pRaqueta) {
-		if(posy >= pRaqueta.getPosy() && posy+2*radio <= pRaqueta.getPosy()+100) {
+		if(posy+2*radio >= pRaqueta.getPosy() && posy <= pRaqueta.getPosy()+100) {
 			if (pRaqueta.getPosx() == 0) {
 				if(posx <= 20) {
-					if(90 <= Math.toDegrees(angulo) && Math.toDegrees(angulo) <= 270) return true;
+					if(velx < 0) return true;
 				}
 
 			}else {
 				if(posx+2*radio >= pRaqueta.getPosx()) {
 					System.out.println(Math.toDegrees(angulo));
-					if(90 >= Math.toDegrees(angulo) || Math.toDegrees(angulo) >= 270) return true;
+					if(velx > 0) return true;
 				}
 			}
 		}
