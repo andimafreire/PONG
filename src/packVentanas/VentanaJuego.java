@@ -2,7 +2,6 @@ package packVentanas;
 
 import java.awt.Canvas;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -41,11 +40,31 @@ public class VentanaJuego extends Canvas implements Runnable, KeyListener {
 		juego.frame.setVisible(true);
 		juego.start();
 	}
-	
+
 	public static void end(String pUsuario, String pRival, int pTantos) {
+		int minutos = Juego.getJuego().getReloj().getMinutos();
+		int segundos = Juego.getJuego().getReloj().getSegundos();
+		
+		double factor;
+		switch (pRival) {
+		case "MaquinaT":
+			factor = 0.50;
+			break;
+		case "MaquinaL":
+			factor = 0.75;
+			break;
+		default:
+			factor = 1.0;
+			break;
+		}
+
+		int puntos = (int) ((pTantos * 1000 - minutos * 600 - segundos * 60) * factor);
+
 		ConnSQL db = new ConnSQL();
-		db.addPuntuacion(pUsuario, pRival, pTantos);
+		db.addPuntuacion(pUsuario, pRival, puntos);
+		
 		JOptionPane.showMessageDialog(null, "El ganador es " + pUsuario + "!!");
+		
 		Puntuaciones.crear(true);
 		stop();
 	}
@@ -63,7 +82,7 @@ public class VentanaJuego extends Canvas implements Runnable, KeyListener {
 			thread.join();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
-		}		
+		}
 	}
 
 	@Override
@@ -92,7 +111,6 @@ public class VentanaJuego extends Canvas implements Runnable, KeyListener {
 		Graphics g = bs.getDrawGraphics();
 		g.setColor(DatosJuego.FONDO);
 		g.fillRect(0, 0, getWidth(), getHeight());
-		g.setFont(new Font("Arial", Font.BOLD, 26));
 		Juego.getJuego().pintar(g);
 		g.dispose();
 		bs.show();

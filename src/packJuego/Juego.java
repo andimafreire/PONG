@@ -1,5 +1,6 @@
 package packJuego;
 
+import java.awt.Font;
 import java.awt.Graphics;
 
 import packVentanas.VentanaJuego;
@@ -10,10 +11,16 @@ public class Juego {
 	private ListaPelotas misPelotas;
 	private Jugador jugador1;
 	private Jugador jugador2;
+	private Reloj reloj;
 
 	private Juego() {
 		misPelotas = new ListaPelotas();
 		misPelotas.aniadirPelota(new Pelota(DatosJuego.ANCHURA / 2, DatosJuego.ALTURA / 2, 0));
+		if (reloj == null) {
+			this.reloj = new Reloj();
+		} else {
+			reloj.reset();
+		}
 	}
 
 	public static Juego getJuego() {
@@ -21,6 +28,10 @@ public class Juego {
 			miJuego = new Juego();
 		}
 		return miJuego;
+	}
+
+	public Reloj getReloj() {
+		return reloj;
 	}
 
 	public void setJugadores(String pUsuario1, String pUsuario2) {
@@ -48,10 +59,13 @@ public class Juego {
 		jugador1.pintar(g);
 		jugador2.pintar(g);
 		g.setColor(DatosJuego.COLOR_TEXTO);
-		g.drawString(String.valueOf("[J2] " + jugador2.getNombre() + ": " + jugador2.getTantos()),
-				DatosJuego.ANCHURA / 3, 40);
-		g.drawString(String.valueOf("[J1] " + jugador1.getNombre() + ": " + jugador1.getTantos()),
-				DatosJuego.ANCHURA / 3, DatosJuego.ALTURA - 40);
+		g.setFont(new Font("Arial", Font.BOLD, 20));
+		reloj.pintar(g);
+		g.drawString(String.valueOf(jugador2.getNombre()), DatosJuego.LIMITE_IZQ + 40, 40);
+		g.drawString(String.valueOf(jugador2.getTantos()), DatosJuego.LIMITE_IZQ + 40, 65);
+		g.drawString(String.valueOf(jugador1.getNombre()),
+				DatosJuego.ANCHURA - g.getFontMetrics().stringWidth(jugador1.getNombre()) - 40, 40);
+		g.drawString(String.valueOf(jugador1.getTantos()), DatosJuego.ANCHURA - 50, 65);
 	}
 
 	public void marcarTanto(boolean b, int pId) {
@@ -76,7 +90,7 @@ public class Juego {
 	public void moverJugador1(int p) {
 		jugador1.mover(p);
 	}
-	
+
 	public void ganar(String pUsuario, String pRival, int pTantos) {
 		VentanaJuego.end(pUsuario, pRival, pTantos);
 	}

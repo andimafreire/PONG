@@ -8,7 +8,7 @@ import packDB.ConnSQL;
 
 public class Puntuaciones {
 
-	private static int width = 300, height = 300;
+	private static int width = 350, height = 300;
 	private static ConnSQL db = new ConnSQL();
 	private static JFrame frame;
 
@@ -32,10 +32,10 @@ public class Puntuaciones {
 
 		panel.setLayout(null);
 		String[][] puntuaciones = db.getRanking();
-
+		
 		for (int i = 0; i < puntuaciones[0].length; i++) {
-			JLabel ranking = new JLabel("TOP" + (i + 1) + ": " + puntuaciones[0][i] + " vs " + puntuaciones[1][i]
-					+ ": " + puntuaciones[2][i] + " puntos");
+			JLabel ranking = new JLabel("TOP " + (i + 1) + ":   " + puntuaciones[0][i] + " (" + puntuaciones[2][i]
+					+ " puntos vs " + puntuaciones[1][i] + ")");
 			ranking.setBounds(20, 25 * i, 290, 25);
 			panel.add(ranking);
 		}

@@ -18,7 +18,7 @@ public class DatosJuego {
 	// Datos de las raquestas
 	public static final int ALTURA_RAQUETA = 100;
 	public static final int ANCHURA_RAQUETA = 20;
-	public static final Color COLOR_RAQUETA = Color.BLUE;
+	public static final Color COLOR_RAQUETA = Color.BLACK;
 
 	// Datos de la pelota
 	public static final int RADIO_PELOTA = 12;
