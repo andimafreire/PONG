@@ -4,6 +4,7 @@ import java.sql.*;
 
 public class ConnSQL {
 
+	// Don't touch anything or our ninja frog will annihilate you
 	private String url = "jdbc:mysql://sql7.freesqldatabase.com:3306/";
 	private String user = "sql7233144";
 	private String passwd = "w3sZdbyXe2";
@@ -43,7 +44,7 @@ public class ConnSQL {
 		}
 	}
 
-	public Boolean userExist(String pUsername) {
+	public Boolean userExists(String pUsername) {
 		String query = "SELECT username FROM sql7233144.Usuario WHERE username='" + pUsername + "';";
 		String username = null;
 

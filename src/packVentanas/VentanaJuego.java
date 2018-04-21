@@ -1,7 +1,6 @@
 package packVentanas;
 
 import java.awt.Canvas;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -9,6 +8,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import packJuego.DatosJuego;
 import packJuego.Juego;
@@ -16,9 +16,9 @@ import packJuego.Juego;
 public class VentanaJuego extends Canvas implements Runnable, KeyListener {
 	private static final long serialVersionUID = 1L;
 
-	private Thread thread;
+	private static Thread thread;
 	private JFrame frame;
-	private boolean running = false;
+	private static boolean running = false;
 
 	public VentanaJuego() {
 		frame = new JFrame();
@@ -28,9 +28,8 @@ public class VentanaJuego extends Canvas implements Runnable, KeyListener {
 		requestFocus();
 	}
 
-	public static void main(String[] args) {
-		Juego.getJuego().setJugadores("Paco Pérez", "Juan Giménez");
-		DatosJuego.setColorPelota(Color.GREEN);
+	public static void empezar(String pUsuario1, String pUsuario2) {
+		Juego.getJuego().setJugadores(pUsuario1, pUsuario2);
 		VentanaJuego juego = new VentanaJuego();
 		juego.frame.setResizable(false);
 		juego.frame.setTitle(DatosJuego.TITULO);
@@ -41,6 +40,11 @@ public class VentanaJuego extends Canvas implements Runnable, KeyListener {
 		juego.frame.setVisible(true);
 		juego.start();
 	}
+	
+	public static void end(String pUsuario) {
+		JOptionPane.showMessageDialog(null, "El ganador es " + pUsuario);
+		stop();
+	}
 
 	public synchronized void start() {
 		running = true;
@@ -49,13 +53,13 @@ public class VentanaJuego extends Canvas implements Runnable, KeyListener {
 		addKeyListener(this);
 	}
 
-	public synchronized void stop() {
+	public synchronized static void stop() {
 		running = false;
 		try {
 			thread.join();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
-		}
+		}		
 	}
 
 	@Override

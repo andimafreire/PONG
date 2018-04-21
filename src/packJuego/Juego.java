@@ -2,6 +2,8 @@ package packJuego;
 
 import java.awt.Graphics;
 
+import packVentanas.VentanaJuego;
+
 public class Juego {
 
 	private static Juego miJuego;
@@ -67,5 +69,9 @@ public class Juego {
 
 	public void moverJugador1(int p) {
 		jugador1.mover(p);
+	}
+	
+	public void ganar(String pUsuario) {
+		VentanaJuego.end(pUsuario);
 	}
 }

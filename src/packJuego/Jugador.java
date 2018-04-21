@@ -28,6 +28,9 @@ public class Jugador {
 
 	public void sumarTanto() {
 		tantos++;
+		if (tantos >= DatosJuego.getTantosVictoria()) {
+			Juego.getJuego().ganar(usuario);
+		}
 	}
 
 	public int getTantos() {

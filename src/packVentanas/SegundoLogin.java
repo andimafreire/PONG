@@ -13,13 +13,15 @@ import javax.swing.JTextField;
 
 import packDB.ConnSQL;
 
-public class LoginRegister {
+public class SegundoLogin {
 
 	private static int width = 300, height = 150;
 	private static ConnSQL db = new ConnSQL();
 	private static JFrame frame;
+	private static String usuario;
 
-	public static void main(String[] args) {
+	public static void crear(String pUsuario) {
+		usuario = pUsuario;
 		frame = new JFrame("Pong - Grupo Doce");
 		frame.setSize(width, height);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -67,24 +69,28 @@ public class LoginRegister {
 				System.out.println("Password: " + password);
 				System.out.println("------------------------");
 				// Iniciar sesion
-				if (db.userExists(username)) {
-					if (db.login(username, password)) {
-						System.out.println("Logged in!");
+				if (usuario.equals(username)) {
+					JOptionPane.showMessageDialog(null, "Este usuario lo tiene tu rival, melón");
+				} else {
+					if (db.userExists(username)) {
+						if (db.login(username, password)) {
+							System.out.println("Logged in!");
+							// Pasar a la ventana de opciones
+							frame.setVisible(false);
+							VentanaJuego.empezar(usuario, username);
+						} else {
+							JOptionPane.showMessageDialog(null, "Contraseña incorrecta");
+						}
+						// Registrar
+					} else if (username.length() > 0 && username.length() <= 30 && password.length() > 0
+							&& password.length() <= 30) {
+						db.register(username, password);
 						// Pasar a la ventana de opciones
 						frame.setVisible(false);
-						MenuJuego.crear(username);
+						VentanaJuego.empezar(usuario, username);
 					} else {
-						JOptionPane.showMessageDialog(null, "Contraseña incorrecta");
+						JOptionPane.showMessageDialog(null, "Formato incorrecto");
 					}
-					// Registrar
-				} else if (username.length() > 0 && username.length() <= 30 && password.length() > 0
-						&& password.length() <= 30) {
-					db.register(username, password);
-					// Pasar a la ventana de opciones
-					frame.setVisible(false);
-					MenuJuego.crear(username);
-				} else {
-					JOptionPane.showMessageDialog(null, "Formato incorrecto");
 				}
 			}
 		});
