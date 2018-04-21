@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import packDB.ConnSQL;
 import packJuego.DatosJuego;
@@ -42,9 +43,9 @@ public class VentanaJuego extends Canvas implements Runnable, KeyListener {
 	}
 	
 	public static void end(String pUsuario, String pRival, int pTantos) {
-		System.out.println("Hola?");
 		ConnSQL db = new ConnSQL();
 		db.addPuntuacion(pUsuario, pRival, pTantos);
+		JOptionPane.showMessageDialog(null, "El ganador es " + pUsuario + "!!");
 		Puntuaciones.crear(true);
 		stop();
 	}

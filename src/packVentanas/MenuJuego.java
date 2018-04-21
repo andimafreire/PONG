@@ -153,5 +153,9 @@ public class MenuJuego {
 			}
 		});
 		panel.add(btnRanking);
+		
+		DatosJuego.setTantosVictoria(comboBox2.getSelectedItem().toString());
+		DatosJuego.setColorPelota(comboBox.getSelectedItem().toString());
+		
 	}
 }

@@ -81,7 +81,7 @@ public class ConnSQL {
 	}
 
 	public String[][] getRanking() {
-		String query = "SELECT * FROM sql7233144.Puntuacion ORDER BY puntos LIMIT 10;";
+		String query = "SELECT * FROM (SELECT * FROM sql7233144.Puntuacion ORDER BY puntos ASC) tmp ORDER BY puntos DESC LIMIT 10;";
 		String[][] resultado = new String[3][10];
 
 		try {
