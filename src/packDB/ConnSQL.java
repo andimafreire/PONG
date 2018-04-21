@@ -79,4 +79,62 @@ public class ConnSQL {
 		}
 		System.out.println("Nuevo usuario " + pUsername + " introducido en la BD");
 	}
+
+	public String[][] getRanking() {
+		String query = "SELECT * FROM sql7233144.Puntuacion ORDER BY puntos LIMIT 10;";
+		String[][] resultado = new String[3][10];
+
+		try {
+			Statement st = this.conn.createStatement();
+			ResultSet res = st.executeQuery(query);
+			int i = 0;
+			while (res.next()) {
+				resultado[0][i] = res.getString("jugador");
+				resultado[1][i] = res.getString("rival");
+				resultado[2][i] = res.getString("puntos");
+				i++;
+			}
+		} catch (Exception e) {
+			System.out.println("Exception: " + e.getMessage());
+		}
+
+		return resultado;
+	}
+	
+	public void addPuntuacion(String pUsername, String pRival, int pPuntos) {
+		String query = "SELECT puntos FROM sql7233144.Puntuacion WHERE jugador='" + pUsername + "';";
+		String puntos = null;
+
+		try {
+			Statement st = this.conn.createStatement();
+			ResultSet res = st.executeQuery(query);
+			while (res.next()) {
+				puntos = res.getString("puntos");
+			}
+		} catch (Exception e) {
+			System.out.println("Exception: " + e.getMessage());
+		}
+
+		if (puntos != null) {
+			if (pPuntos >= Integer.parseInt(puntos)) {
+				query = "INSERT INTO sql7233144.Puntuacion VALUES ('" + pUsername + "', '" + pRival + "', '" + pPuntos + "');";
+
+				try {
+					Statement st = this.conn.createStatement();
+					st.executeUpdate(query);
+				} catch (Exception e) {
+					System.out.println("Exception: " + e.getMessage());
+				}
+			}
+		} else {
+			query = "INSERT INTO sql7233144.Puntuacion VALUES ('" + pUsername + "', '" + pRival + "', '" + pPuntos + "');";
+
+			try {
+				Statement st = this.conn.createStatement();
+				st.executeUpdate(query);
+			} catch (Exception e) {
+				System.out.println("Exception: " + e.getMessage());
+			}
+		}
+	}
 }

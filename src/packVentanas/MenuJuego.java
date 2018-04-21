@@ -16,7 +16,7 @@ import java.awt.SystemColor;
 
 public class MenuJuego {
 
-	private static int width = 250, height = 220;
+	private static int width = 250, height = 250;
 	private static String usuario;
 	private static JFrame frame;
 
@@ -83,7 +83,7 @@ public class MenuJuego {
 		txtSelColor.setText("Color de las pelotas:");
 		txtSelColor.setBounds(10, 119, 132, 20);
 		panel.add(txtSelColor);
-		
+
 		// Desplegable de colores
 		JComboBox<String> comboBox = new JComboBox<String>();
 		comboBox.setToolTipText("");
@@ -104,7 +104,7 @@ public class MenuJuego {
 			}
 		});
 		panel.add(comboBox);
-		
+
 		// Etiqueta puntos para ganar
 		JTextArea txtPtsGanar = new JTextArea();
 		txtPtsGanar.setText("Puntos para ganar:");
@@ -113,11 +113,12 @@ public class MenuJuego {
 		txtPtsGanar.setBackground(SystemColor.menu);
 		txtPtsGanar.setBounds(10, 150, 132, 20);
 		panel.add(txtPtsGanar);
-		
+
 		// Desplegable de puntos para ganar
 		JComboBox<String> comboBox2 = new JComboBox<String>();
 		comboBox2.setToolTipText("");
 		comboBox2.setBounds(143, 150, 89, 20);
+		/* Detallado
 		comboBox2.addItem("15");
 		comboBox2.addItem("16");
 		comboBox2.addItem("17");
@@ -129,11 +130,28 @@ public class MenuJuego {
 		comboBox2.addItem("23");
 		comboBox2.addItem("24");
 		comboBox2.addItem("25");
+		*/
+		comboBox2.addItem("5");
+		comboBox2.addItem("10");
+		comboBox2.addItem("15");
+		comboBox2.addItem("20");
+		comboBox2.addItem("25");
 		comboBox2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DatosJuego.setTantosVictoria(comboBox2.getSelectedItem().toString());
 			}
 		});
 		panel.add(comboBox2);
+
+		// Jugar contra otro Jugador
+		JButton btnRanking = new JButton("Ver el ranking actual");
+		btnRanking.setBounds(10, 181, 222, 25);
+		btnRanking.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Puntuaciones.crear(false);
+			}
+		});
+		panel.add(btnRanking);
 	}
 }

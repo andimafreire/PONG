@@ -57,8 +57,14 @@ public class Juego {
 	public void marcarTanto(boolean b, int pId) {
 		if (b == true) {
 			jugador1.sumarTanto();
+			if (jugador1.getTantos() >= DatosJuego.getTantosVictoria()) {
+				Juego.getJuego().ganar(jugador1.getNombre(), jugador2.getNombre(), jugador1.getTantos());
+			}
 		} else {
 			jugador2.sumarTanto();
+			if (jugador2.getTantos() >= DatosJuego.getTantosVictoria()) {
+				Juego.getJuego().ganar(jugador2.getNombre(), jugador1.getNombre(), jugador2.getTantos());
+			}
 		}
 		misPelotas.eliminarPelota(pId);
 	}
@@ -71,7 +77,7 @@ public class Juego {
 		jugador1.mover(p);
 	}
 	
-	public void ganar(String pUsuario) {
-		VentanaJuego.end(pUsuario);
+	public void ganar(String pUsuario, String pRival, int pTantos) {
+		VentanaJuego.end(pUsuario, pRival, pTantos);
 	}
 }

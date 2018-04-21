@@ -70,6 +70,7 @@ public class DatosJuego {
 		return color_pelota;
 	}
 
+	/* Detallado
 	public static void setTantosVictoria(String pTantos) {
 		switch (pTantos) {
 		case "15":
@@ -101,6 +102,29 @@ public class DatosJuego {
 			break;
 		case "24":
 			tantos_victoria = 24;
+			break;
+		case "25":
+			tantos_victoria = 25;
+			break;
+		default:
+			tantos_victoria = 22;
+			break;
+		}
+	} */
+	
+	public static void setTantosVictoria(String pTantos) {
+		switch (pTantos) {
+		case "5":
+			tantos_victoria = 5;
+			break;
+		case "10":
+			tantos_victoria = 10;
+			break;
+		case "15":
+			tantos_victoria = 15;
+			break;
+		case "20":
+			tantos_victoria = 20;
 			break;
 		case "25":
 			tantos_victoria = 25;
