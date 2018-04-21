@@ -4,16 +4,14 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import packVentanas.VentanaJuego;
-
 public class ListaPelotas {
 
 	private ArrayList<Pelota> pelotas;
 
-	public ListaPelotas(){
+	public ListaPelotas() {
 		pelotas = new ArrayList<Pelota>();
 	}
-	
+
 	private Iterator<Pelota> getIterator() {
 		return pelotas.iterator();
 	}
@@ -30,8 +28,8 @@ public class ListaPelotas {
 
 	public void eliminarPelota(int pId) {
 		pelotas.remove(buscarPelota(pId));
-		if (pelotas.size()<=0) {
-			Pelota p = new Pelota(VentanaJuego.anchura/2, VentanaJuego.altura/2, pId);
+		if (pelotas.size() <= 0) {
+			Pelota p = new Pelota(DatosJuego.ANCHURA / 2, DatosJuego.ALTURA / 2, pId);
 			pelotas.add(p);
 		}
 	}
@@ -54,18 +52,27 @@ public class ListaPelotas {
 	}
 
 	public void mover() {
-		for (Pelota p : pelotas) p.mover();
+		for (Pelota p : pelotas) {
+			p.mover();
+		}
 	}
 
-	public void comprobarParedes(int altura, int anchura) {
-		for (Pelota p : pelotas) p.comprobarParedes(altura, anchura);	
+	public void comprobarParedes() {
+		for (Pelota p : pelotas) {
+			p.comprobarParedes();
+		}
 	}
 
 	public void pintar(Graphics g) {
-		for (Pelota p : pelotas) p.pintar(g);
+		for (Pelota p : pelotas) {
+			p.pintar(g);
+		}
 	}
 
 	public void comprobarRaqueta(Raqueta raqueta) {
-		for (Pelota p : pelotas) p.comprobarRaqueta(raqueta);	
+		for (Pelota p : pelotas) {
+			p.comprobarRaqueta(raqueta);
+		}
 	}
 }
+

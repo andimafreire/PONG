@@ -1,6 +1,5 @@
 package packVentanas;
 
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -11,8 +10,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-
-
 
 import packDB.ConnSQL;
 
@@ -67,24 +64,22 @@ public class LoginRegister {
 				String password = stringBuilder.toString();
 				System.out.println("Password:" + password);
 				System.out.println("------------------------");
-				//Iniciar sesion
+				// Iniciar sesion
 				if (db.userExist(username)) {
 					if (db.login(username, password)) {
 						System.out.println("Logged in!");
 					} else {
 						JOptionPane.showMessageDialog(null, "Contraseña incorrecta");
 					}
-					//Registrar
-				}else if(username.length()>0 && username.length()<=30 && password.length()>0 && password.length()<=30){
+					// Registrar
+				} else if (username.length() > 0 && username.length() <= 30 && password.length() > 0
+						&& password.length() <= 30) {
 					db.register(username, password);
-				}else{
+				} else {
 					JOptionPane.showMessageDialog(null, "Formato incorrecto");
 				}
 			}
-
 		});
 		panel.add(loginButton);
-
 	}
-
 }

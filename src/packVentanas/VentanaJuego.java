@@ -9,51 +9,46 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
+
+import packJuego.DatosJuego;
 import packJuego.Juego;
 
-public class VentanaJuego extends Canvas implements Runnable,KeyListener{
-	
-	private static String title = "Pong GrupoDoce";
-	public final static int altura = 480;
-	public final static int anchura = 640;
-	
-	private boolean running = false;
-	private final int fps = 60;
+public class VentanaJuego extends Canvas implements Runnable, KeyListener {
+	private static final long serialVersionUID = 1L;
+
 	private Thread thread;
 	private JFrame frame;
-	
-	
+	private boolean running = false;
+
 	public VentanaJuego() {
 		frame = new JFrame();
-		Dimension size = new Dimension(anchura,altura);
+		Dimension size = new Dimension(DatosJuego.ANCHURA, DatosJuego.ALTURA);
 		setPreferredSize(size);
 		setFocusable(true);
 		requestFocus();
 	}
 
 	public static void main(String[] args) {
-		Juego.getJuego().setJugadores("jsdj", "dsd");
+		Juego.getJuego().setJugadores("Paco Pérez", "Juan Giménez");
+		DatosJuego.setColorPelota(Color.GREEN);
 		VentanaJuego juego = new VentanaJuego();
 		juego.frame.setResizable(false);
-		juego.frame.setTitle(title);
+		juego.frame.setTitle(DatosJuego.TITULO);
 		juego.frame.add(juego);
 		juego.frame.pack();
 		juego.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		juego.frame.setLocationRelativeTo(null);
 		juego.frame.setVisible(true);
 		juego.start();
-	
 	}
-	
+
 	public synchronized void start() {
 		running = true;
 		thread = new Thread(this);
 		thread.start();
 		addKeyListener(this);
 	}
-	
 
-	
 	public synchronized void stop() {
 		running = false;
 		try {
@@ -62,64 +57,68 @@ public class VentanaJuego extends Canvas implements Runnable,KeyListener{
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public void run() {
 		long lastTime = System.nanoTime();
-		final double ns = 1000000000.0/fps;
+		final double ns = 1000000000.0 / DatosJuego.FPS;
 		double delta = 0;
-		while(running) {
+		while (running) {
 			long now = System.nanoTime();
-			delta += (now-lastTime)/ns;
+			delta += (now - lastTime) / ns;
 			lastTime = now;
-			if(delta >=1) {
+			if (delta >= 1) {
 				Juego.getJuego().update();
 				delta--;
 			}
 			pintar();
 		}
 	}
-	
+
 	public void pintar() {
 		BufferStrategy bs = getBufferStrategy();
-		if(bs==null) {
+		if (bs == null) {
 			createBufferStrategy(3);
 			return;
 		}
 		Graphics g = bs.getDrawGraphics();
-		g.setColor(Color.WHITE);
+		g.setColor(DatosJuego.FONDO);
 		g.fillRect(0, 0, getWidth(), getHeight());
-		g.setFont(new Font("Arial",Font.BOLD,32));
+		g.setFont(new Font("Arial", Font.BOLD, 26));
 		Juego.getJuego().pintar(g);
 		g.dispose();
 		bs.show();
 	}
-	
 
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 		int code = arg0.getKeyCode();
-		if(code == KeyEvent.VK_W) Juego.getJuego().moverJugador2(-10); 
-		if(code == KeyEvent.VK_S)  Juego.getJuego().moverJugador2(10);
-		if(code == KeyEvent.VK_UP) Juego.getJuego().moverJugador1(-10); 
-		if(code == KeyEvent.VK_DOWN) Juego.getJuego().moverJugador1(10);
+		if (code == KeyEvent.VK_W)
+			Juego.getJuego().moverJugador2(-10);
+		if (code == KeyEvent.VK_S)
+			Juego.getJuego().moverJugador2(10);
+		if (code == KeyEvent.VK_UP)
+			Juego.getJuego().moverJugador1(-10);
+		if (code == KeyEvent.VK_DOWN)
+			Juego.getJuego().moverJugador1(10);
 	}
-
 
 	@Override
 	public void keyReleased(KeyEvent arg0) {
 		int code = arg0.getKeyCode();
-		if(code == KeyEvent.VK_W) Juego.getJuego().moverJugador2(0); 
-		if(code == KeyEvent.VK_S) Juego.getJuego().moverJugador2(0);
-		if(code == KeyEvent.VK_UP) Juego.getJuego().moverJugador1(0); 
-		if(code == KeyEvent.VK_DOWN) Juego.getJuego().moverJugador1(0);
+		if (code == KeyEvent.VK_W)
+			Juego.getJuego().moverJugador2(0);
+		if (code == KeyEvent.VK_S)
+			Juego.getJuego().moverJugador2(0);
+		if (code == KeyEvent.VK_UP)
+			Juego.getJuego().moverJugador1(0);
+		if (code == KeyEvent.VK_DOWN)
+			Juego.getJuego().moverJugador1(0);
 	}
-
 
 	@Override
 	public void keyTyped(KeyEvent arg0) {
-	
+
 	}
 
-	
 }

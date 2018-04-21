@@ -1,9 +1,8 @@
 package packJuego;
 
-public class MaquinaT extends Jugador{
+public class MaquinaT extends Jugador {
 
-	public MaquinaT(int pX, int pAltoJuego) {
-		super(pX, pAltoJuego);
+	public MaquinaT(int pX, String pUsuario) {
+		super(pX, pUsuario);
 	}
-
 }
