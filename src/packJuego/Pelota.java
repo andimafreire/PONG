@@ -61,7 +61,9 @@ public class Pelota {
 					velx = velTotal * Math.cos(angulo);
 					vely = velTotal * Math.sin(angulo);
 				} else {
-					velx *= -1;
+					Double angulo = Math.toRadians(0);
+					velx = velTotal * Math.cos(angulo);
+					vely = velTotal * Math.sin(angulo);
 				}
 			} else { // colisión con raqueta de jugador1
 				if (pRaqueta.getVelocidad() > 0) { // raqueta en movimiento hacía abajo
@@ -73,7 +75,9 @@ public class Pelota {
 					velx = velTotal * Math.cos(angulo);
 					vely = velTotal * Math.sin(angulo);
 				} else {
-					velx *= -1;
+					Double angulo = Math.toRadians(180);
+					velx = velTotal * Math.cos(angulo);
+					vely = velTotal * Math.sin(angulo);
 				}
 			}
 		}
@@ -100,5 +104,9 @@ public class Pelota {
 
 	public int getId() {
 		return id;
+	}
+
+	public void aumentarVelocidad() {
+		velTotal++;
 	}
 }

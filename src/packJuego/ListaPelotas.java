@@ -74,5 +74,11 @@ public class ListaPelotas {
 			p.comprobarRaqueta(raqueta);
 		}
 	}
+
+	public void aumentarVelocidad() {
+		for (Pelota p : pelotas) {
+			p.aumentarVelocidad();
+		}
+	}
 }
 

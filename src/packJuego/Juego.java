@@ -94,4 +94,8 @@ public class Juego {
 	public void ganar(String pUsuario, String pRival, int pTantos) {
 		VentanaJuego.end(pUsuario, pRival, pTantos);
 	}
+	
+	public void aumentarVelocidad() {
+		misPelotas.aumentarVelocidad();
+	}
 }

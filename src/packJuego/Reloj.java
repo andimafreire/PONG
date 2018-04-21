@@ -4,7 +4,9 @@ import java.awt.Graphics;
 import java.util.Observable;
 
 public class Reloj extends Observable implements Runnable {
+	private long start;
 	private Thread t;
+	private String tiempo;
 	private int minutos;
 	private int segundos;
 	private volatile boolean stopped;
@@ -26,14 +28,17 @@ public class Reloj extends Observable implements Runnable {
 	public void run() {
 		minutos = 0;
 		segundos = 0;
+		start = System.currentTimeMillis();
 		while (!stopped) {
+			if (System.currentTimeMillis() - start >= 10000) {
+				Juego.getJuego().aumentarVelocidad();
+				start = System.currentTimeMillis();
+			}
 			if (segundos == 60) {
 				minutos++;
 				segundos = 0;
 			}
-			setChanged();
-			String tiempo = (segundos < 10) ? minutos + ":0" + segundos : minutos + ":" + segundos;
-			notifyObservers(tiempo);
+			tiempo = (segundos < 10) ? minutos + ":0" + segundos : minutos + ":" + segundos;
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
@@ -49,16 +54,6 @@ public class Reloj extends Observable implements Runnable {
 	}
 
 	public void pintar(Graphics g) {
-		String tmpMin = Integer.toString(minutos);
-		String tmpSeg = Integer.toString(segundos);
-
-		if (minutos >= 0 && minutos <= 9) {
-			tmpMin = "0" + tmpMin;
-		}
-		if (segundos >= 0 && segundos <= 9) {
-			tmpSeg = "0" + tmpSeg;
-		}
-		g.drawString(String.valueOf(tmpMin + ":" + tmpSeg),
-				DatosJuego.ANCHURA / 2 - g.getFontMetrics().stringWidth(tmpMin + ":" + tmpSeg) / 2, 20);
+		g.drawString(tiempo, DatosJuego.ANCHURA / 2 - g.getFontMetrics().stringWidth(tiempo) / 2, 20);
 	}
 }
