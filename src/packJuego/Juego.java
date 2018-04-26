@@ -100,6 +100,8 @@ public class Juego {
 			}
 		}
 		misPelotas.eliminarPelota(pId);
+		jugador1.desRalentizar();
+		jugador2.desRalentizar();
 		reloj.resetearTemporizador();
 	}
 

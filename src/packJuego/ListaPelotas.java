@@ -52,32 +52,32 @@ public class ListaPelotas {
 	}
 
 	public void mover() {
-		for (Pelota p : pelotas) {
-			p.mover();
+		for (int i = 0; i < size(); i++) {
+			pelotas.get(i).mover();
 		}
 	}
 
 	public void comprobarParedes() {
-		for (Pelota p : pelotas) {
-			p.comprobarParedes();
+		for (int i = 0; i < size(); i++) {
+			pelotas.get(i).comprobarParedes();
 		}
 	}
 
 	public void pintar(Graphics g) {
-		for (Pelota p : pelotas) {
-			p.pintar(g);
+		for (int i = 0; i < size(); i++) {
+			pelotas.get(i).pintar(g);
 		}
 	}
 
 	public void comprobarRaqueta(Raqueta raqueta) {
-		for (Pelota p : pelotas) {
-			p.comprobarRaqueta(raqueta);
+		for (int i = 0; i < size(); i++) {
+			pelotas.get(i).comprobarRaqueta(raqueta);
 		}
 	}
 
 	public void aumentarVelocidad() {
-		for (Pelota p : pelotas) {
-			p.aumentarVelocidad();
+		for (int i = 0; i < size(); i++) {
+			pelotas.get(i).aumentarVelocidad();
 		}
 	}
 
@@ -86,8 +86,8 @@ public class ListaPelotas {
 	}
 
 	public void comprobarModificadores() {
-		for (Pelota p : pelotas) {
-			p.comprobarModificadores();
+		for (int i = 0; i < size(); i++) {
+			pelotas.get(i).comprobarModificadores();
 		}
 	}
 }

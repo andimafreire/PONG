@@ -17,8 +17,8 @@ public class ListaModificadores {
 	}
 
 	public void pintar(Graphics g) {
-		for (Modificador m : modificadores) {
-			m.pintar(g);
+		for (int i = 0; i < modificadores.size(); i++) {
+			modificadores.get(i).pintar(g);
 		}
 	}
 	public void aniadirModificador(Modificador pModificador) {
@@ -74,16 +74,16 @@ public class ListaModificadores {
 
 	public int getNumDuplicadores() {
 		int num = 0;
-		for (Modificador m : modificadores) {
-			if (m instanceof Duplicador) num++;
+		for (int i = 0; i < modificadores.size(); i++) {
+			if (modificadores.get(i) instanceof Duplicador) num++;
 		}
 		return num;
 	}
 
 	public int getNumAceleradores() {
 		int num = 0;
-		for (Modificador m : modificadores) {
-			if (m instanceof Acelerador) num++;
+		for (int i = 0; i < modificadores.size(); i++) {
+			if (modificadores.get(i) instanceof Acelerador) num++;
 		}
 		return num;
 	}

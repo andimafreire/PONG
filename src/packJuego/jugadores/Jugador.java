@@ -50,4 +50,8 @@ public class Jugador {
 	public void ralentizar() {
 		ralentizar = true;
 	}
+
+	public void desRalentizar() {
+		ralentizar = false;
+	}
 }
