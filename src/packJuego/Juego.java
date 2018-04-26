@@ -2,19 +2,32 @@ package packJuego;
 
 import java.awt.Font;
 import java.awt.Graphics;
+import java.util.concurrent.ThreadLocalRandom;
 
+import packJuego.jugadores.Jugador;
+import packJuego.jugadores.MaquinaL;
+import packJuego.jugadores.MaquinaT;
+import packJuego.jugadores.Usuario;
+import packJuego.modificadores.Acelerador;
+import packJuego.modificadores.Duplicador;
+import packJuego.modificadores.Freno;
+import packJuego.modificadores.ListaModificadores;
+import packJuego.modificadores.Modificador;
 import packVentanas.VentanaJuego;
 
 public class Juego {
 
 	private static Juego miJuego;
 	private ListaPelotas misPelotas;
+	private ListaModificadores modificadores;
 	private Jugador jugador1;
 	private Jugador jugador2;
+	
 	private Reloj reloj;
 
 	private Juego() {
 		misPelotas = new ListaPelotas();
+		modificadores = new ListaModificadores();
 		misPelotas.aniadirPelota(new Pelota(DatosJuego.ANCHURA / 2, DatosJuego.ALTURA / 2, 0));
 		if (reloj == null) {
 			this.reloj = new Reloj();
@@ -28,6 +41,10 @@ public class Juego {
 			miJuego = new Juego();
 		}
 		return miJuego;
+	}
+
+	public String getNomJugador2() {
+		return jugador2.getNombre();
 	}
 
 	public Reloj getReloj() {
@@ -48,6 +65,7 @@ public class Juego {
 	public void update() {
 		misPelotas.mover();
 		misPelotas.comprobarParedes();
+		misPelotas.comprobarModificadores();
 		jugador1.update();
 		jugador2.update();
 		misPelotas.comprobarRaqueta(jugador1.getRaqueta());
@@ -56,6 +74,7 @@ public class Juego {
 
 	public void pintar(Graphics g) {
 		misPelotas.pintar(g);
+		modificadores.pintar(g); 
 		jugador1.pintar(g);
 		jugador2.pintar(g);
 		g.setColor(DatosJuego.COLOR_TEXTO);
@@ -81,6 +100,7 @@ public class Juego {
 			}
 		}
 		misPelotas.eliminarPelota(pId);
+		reloj.resetearTemporizador();
 	}
 
 	public void moverJugador2(int p) {
@@ -97,5 +117,56 @@ public class Juego {
 	
 	public void aumentarVelocidad() {
 		misPelotas.aumentarVelocidad();
+	}
+	
+	public int getPosyPrimeraPelota() {
+		return misPelotas.getPosyPrimeraPelota();
+	}
+
+	public Modificador buscarModificador(int pPosx, int pPosy) {
+		return modificadores.buscarModificador(pPosx,pPosy);
+	}
+
+	public void aniadirPelota() {
+		for(int i = 0; i < DatosJuego.NUM_MAX_PELOTAS; i++) {
+			if(misPelotas.buscarPelota(i) == null)
+				misPelotas.aniadirPelota(new Pelota(DatosJuego.ANCHURA / 2, DatosJuego.ALTURA / 2, i));
+		}	
+	}
+
+	public void ralentizarJ2() {
+		jugador2.ralentizar();
+	}
+
+	public void ralentizarJ1() {
+		jugador1.ralentizar();	
+	}
+
+	public void insertarModificador() {
+		int x = obtenerXAleatoria();
+		int y = obtenerYAleatoria();
+		while (!modificadores.puedePoner(x,y)) {
+			x = obtenerXAleatoria();
+			y = obtenerYAleatoria();
+		}
+		if(Math.random() <= 0.2) {
+			if (misPelotas.size() < DatosJuego.NUM_MAX_PELOTAS &&
+					modificadores.getNumDuplicadores() < DatosJuego.NUM_MAX_DUPLICADORES)
+				modificadores.aniadirModificador(new Duplicador(x,y));
+
+		} else if (Math.random() > 0.2 && Math.random() < 0.6) {
+			if (modificadores.getNumAceleradores() < DatosJuego.NUM_MAX_ACELERADORES)
+				modificadores.aniadirModificador(new Acelerador(x,y));
+			
+		} else modificadores.aniadirModificador(new Freno(x,y));
+		
+	}
+	
+	private int obtenerXAleatoria() {
+		return ThreadLocalRandom.current().nextInt(DatosJuego.ANCHURA_RAQUETA*2, DatosJuego.ANCHURA-DatosJuego.ANCHURA_RAQUETA*2-DatosJuego.ANCHURA_MODIFICADOR);
+	}
+	
+	private int obtenerYAleatoria() {
+		return ThreadLocalRandom.current().nextInt(0, DatosJuego.ALTURA-DatosJuego.ALTURA_MODIFICADOR);
 	}
 }

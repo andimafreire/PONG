@@ -4,7 +4,8 @@ import java.awt.Graphics;
 import java.util.Observable;
 
 public class Reloj extends Observable implements Runnable {
-	private long start;
+	private long temporizador1;
+	private long temporizador2;
 	private Thread t;
 	private String tiempo;
 	private int minutos;
@@ -28,11 +29,15 @@ public class Reloj extends Observable implements Runnable {
 	public void run() {
 		minutos = 0;
 		segundos = 0;
-		start = System.currentTimeMillis();
+		temporizador1 = System.currentTimeMillis();
 		while (!stopped) {
-			if (System.currentTimeMillis() - start >= 10000) {
+			if (System.currentTimeMillis() - temporizador1 >= DatosJuego.FRECUENCIA_AUMENTO) {
 				Juego.getJuego().aumentarVelocidad();
-				start = System.currentTimeMillis();
+				temporizador1 = System.currentTimeMillis();
+			}
+			if (System.currentTimeMillis() - temporizador2 >= DatosJuego.FRECUENCIA_APARICION) {
+				Juego.getJuego().insertarModificador();
+				temporizador2 = System.currentTimeMillis();
 			}
 			if (segundos == 60) {
 				minutos++;
@@ -55,5 +60,10 @@ public class Reloj extends Observable implements Runnable {
 
 	public void pintar(Graphics g) {
 		g.drawString(tiempo, DatosJuego.ANCHURA / 2 - g.getFontMetrics().stringWidth(tiempo) / 2, 20);
+	}
+	
+	public void resetearTemporizador() {
+		temporizador1 =  System.currentTimeMillis();
+		temporizador2 =  System.currentTimeMillis();
 	}
 }

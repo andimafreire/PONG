@@ -1,17 +1,21 @@
-package packJuego;
+package packJuego.jugadores;
 
 import java.awt.Graphics;
+
+import packJuego.Raqueta;
 
 public class Jugador {
 
 	private String usuario;
 	private Raqueta raqueta;
 	private int tantos;
+	private boolean ralentizar;
 
 	public Jugador(int pX, String pUsuario) {
 		raqueta = new Raqueta(pX);
 		tantos = 0;
 		usuario = pUsuario;
+		ralentizar = false;
 	}
 
 	public void update() {
@@ -23,7 +27,8 @@ public class Jugador {
 	}
 
 	public void mover(int i) {
-		raqueta.mover(i);
+		if (ralentizar) raqueta.mover(i/2);
+		else raqueta.mover(i);
 	}
 
 	public void sumarTanto() {
@@ -40,5 +45,9 @@ public class Jugador {
 
 	public String getNombre() {
 		return usuario;
+	}
+
+	public void ralentizar() {
+		ralentizar = true;
 	}
 }

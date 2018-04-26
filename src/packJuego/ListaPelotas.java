@@ -80,5 +80,15 @@ public class ListaPelotas {
 			p.aumentarVelocidad();
 		}
 	}
+
+	public int getPosyPrimeraPelota() {
+		return pelotas.get(0).getPosy();
+	}
+
+	public void comprobarModificadores() {
+		for (Pelota p : pelotas) {
+			p.comprobarModificadores();
+		}
+	}
 }
 

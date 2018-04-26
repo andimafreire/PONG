@@ -19,12 +19,24 @@ public class DatosJuego {
 	public static final int ALTURA_RAQUETA = 100;
 	public static final int ANCHURA_RAQUETA = 20;
 	public static final Color COLOR_RAQUETA = Color.BLACK;
+	public static final int VELOCIDAD_RAQUETA = 12;
 
 	// Datos de la pelota
 	public static final int RADIO_PELOTA = 12;
 	public static final int VELOCIDAD_INICIAL = 7;
-	public static final double ANGULO_INICIAL = 0.0;
+	public static final int NUM_MAX_PELOTAS = 2;
 	private static Color color_pelota = Color.BLACK;
+	public static final int FRECUENCIA_AUMENTO = 10000;//10 SEGUNDOS
+	
+	// Datos de los Modificadores
+	public static final int ANCHURA_MODIFICADOR = 10;
+	public static final int ALTURA_MODIFICADOR = 20;
+	public static final int FRECUENCIA_APARICION = 5000;//5 SEGUNDOS
+	public static final int NUM_MAX_DUPLICADORES = 1;
+	public static final Color COLOR_ACELERADOR = Color.YELLOW;
+	public static final Color COLOR_FRENO = Color.RED;
+	public static final Color COLOR_DUPLICADOR = Color.ORANGE;
+	public static final int NUM_MAX_ACELERADORES = 3;
 
 	private DatosJuego() {}
 

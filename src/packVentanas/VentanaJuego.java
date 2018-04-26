@@ -119,23 +119,27 @@ public class VentanaJuego extends Canvas implements Runnable, KeyListener {
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 		int code = arg0.getKeyCode();
-		if (code == KeyEvent.VK_W)
-			Juego.getJuego().moverJugador2(-10);
-		if (code == KeyEvent.VK_S)
-			Juego.getJuego().moverJugador2(10);
+		if(!Juego.getJuego().getNomJugador2().equals("MaquinaT")&&!Juego.getJuego().getNomJugador2().equals("MaquinaL")) {
+			if (code == KeyEvent.VK_W)
+				Juego.getJuego().moverJugador2(-DatosJuego.VELOCIDAD_RAQUETA);
+			if (code == KeyEvent.VK_S)
+				Juego.getJuego().moverJugador2(DatosJuego.VELOCIDAD_RAQUETA);
+		}
 		if (code == KeyEvent.VK_UP)
-			Juego.getJuego().moverJugador1(-10);
+			Juego.getJuego().moverJugador1(-DatosJuego.VELOCIDAD_RAQUETA);
 		if (code == KeyEvent.VK_DOWN)
-			Juego.getJuego().moverJugador1(10);
+			Juego.getJuego().moverJugador1(DatosJuego.VELOCIDAD_RAQUETA);
 	}
 
 	@Override
 	public void keyReleased(KeyEvent arg0) {
 		int code = arg0.getKeyCode();
-		if (code == KeyEvent.VK_W)
-			Juego.getJuego().moverJugador2(0);
-		if (code == KeyEvent.VK_S)
-			Juego.getJuego().moverJugador2(0);
+		if(!Juego.getJuego().getNomJugador2().equals("MaquinaT")&&!Juego.getJuego().getNomJugador2().equals("MaquinaL")) {
+			if (code == KeyEvent.VK_W)
+				Juego.getJuego().moverJugador2(0);
+			if (code == KeyEvent.VK_S)
+				Juego.getJuego().moverJugador2(0);
+		}
 		if (code == KeyEvent.VK_UP)
 			Juego.getJuego().moverJugador1(0);
 		if (code == KeyEvent.VK_DOWN)

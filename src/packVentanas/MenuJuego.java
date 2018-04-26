@@ -85,7 +85,7 @@ public class MenuJuego {
 		panel.add(txtSelColor);
 
 		// Desplegable de colores
-		JComboBox<String> comboBox = new JComboBox<String>();
+		final JComboBox<String> comboBox = new JComboBox<String>();
 		comboBox.setToolTipText("");
 		comboBox.setBounds(143, 119, 89, 20);
 		comboBox.addItem("Negro");
@@ -115,7 +115,7 @@ public class MenuJuego {
 		panel.add(txtPtsGanar);
 
 		// Desplegable de puntos para ganar
-		JComboBox<String> comboBox2 = new JComboBox<String>();
+		final JComboBox<String> comboBox2 = new JComboBox<String>();
 		comboBox2.setToolTipText("");
 		comboBox2.setBounds(143, 150, 89, 20);
 		/* Detallado

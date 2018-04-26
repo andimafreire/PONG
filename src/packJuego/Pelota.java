@@ -1,40 +1,39 @@
 package packJuego;
 
 import java.awt.Graphics;
-import java.util.concurrent.ThreadLocalRandom;
+
+import packJuego.modificadores.Modificador;
 
 public class Pelota {
 	private int posx;
 	private int posy;
-
-	private double velx;
-	private double vely;
+	private double vecx;
+	private double vecy;
 
 	private int id;
 	private int radio;
-	private int velTotal;
+	private int velocidad;
 
 	public Pelota(int pPosx, int pPosy, int pId) {
 		posx = pPosx;
 		posy = pPosy;
 		id = pId;
-
-		velTotal = DatosJuego.VELOCIDAD_INICIAL;
+		vecx = 1;
+		vecy = 0;
+		velocidad = DatosJuego.VELOCIDAD_INICIAL;
 		radio = DatosJuego.RADIO_PELOTA;
 
-		Double angulo = Math.toRadians(DatosJuego.ANGULO_INICIAL);
-		velx = velTotal * Math.cos(angulo);
-		vely = velTotal * Math.sin(angulo);
+
 	}
 
 	public void mover() {
-		posx += velx;
-		posy += vely;
+		posx += vecx * velocidad;
+		posy += vecy * velocidad;
 	}
 
 	public void comprobarParedes() {
-		if ((posy <= DatosJuego.LIMITE_SUP && vely < 0) || (posy >= DatosJuego.ALTURA - radio * 2 && vely > 0)) {
-			vely *= -1;
+		if ((posy <= DatosJuego.LIMITE_SUP && vecy  < 0) || (posy >= DatosJuego.ALTURA - radio * 2 && vecy  > 0)) {
+			vecy *= -1;
 		}
 
 		if (posx <= DatosJuego.LIMITE_IZQ) {
@@ -51,49 +50,36 @@ public class Pelota {
 
 	public void comprobarRaqueta(Raqueta pRaqueta) {
 		if (colision(pRaqueta)) {
-			if (pRaqueta.getPosx() == DatosJuego.LIMITE_IZQ) { // colisión con raqueta de jugador2
-				if (pRaqueta.getVelocidad() > 0) { // raqueta en movimiento hacía abajo
-					Double angulo = Math.toRadians(ThreadLocalRandom.current().nextInt(10, 80));
-					velx = velTotal * Math.cos(angulo);
-					vely = velTotal * Math.sin(angulo);
-				} else if (pRaqueta.getVelocidad() < 0) { // raqueta en movimiento hacía arriba
-					Double angulo = Math.toRadians(ThreadLocalRandom.current().nextInt(280, 350));
-					velx = velTotal * Math.cos(angulo);
-					vely = velTotal * Math.sin(angulo);
-				} else {
-					Double angulo = Math.toRadians(0);
-					velx = velTotal * Math.cos(angulo);
-					vely = velTotal * Math.sin(angulo);
-				}
-			} else { // colisión con raqueta de jugador1
-				if (pRaqueta.getVelocidad() > 0) { // raqueta en movimiento hacía abajo
-					Double angulo = Math.toRadians(ThreadLocalRandom.current().nextInt(100, 170));
-					velx = velTotal * Math.cos(angulo);
-					vely = velTotal * Math.sin(angulo);
-				} else if (pRaqueta.getVelocidad() < 0) { // raqueta en movimiento hacía arriba
-					Double angulo = Math.toRadians(ThreadLocalRandom.current().nextInt(190, 260));
-					velx = velTotal * Math.cos(angulo);
-					vely = velTotal * Math.sin(angulo);
-				} else {
-					Double angulo = Math.toRadians(180);
-					velx = velTotal * Math.cos(angulo);
-					vely = velTotal * Math.sin(angulo);
-				}
+			vecx *= -1;
+			if (pRaqueta.getVelocidad() > 0) {
+				vecy += 1; // se suma el vector de la pelota con el vector (0,1)
+							// de la raqueta
+				normalizarVec(); 	// se normaliza el nuevo vector (se mantiene la
+									// dirección, pero cambia el modulo a 1)
+			} else if (pRaqueta.getVelocidad() < 0) {
+				vecy -= 1;
+				normalizarVec();
 			}
 		}
 	}
-
+	
+	private void normalizarVec() {
+		double mag = Math.sqrt(vecx * vecx + vecy * vecy);
+		vecx = vecx / mag;
+		vecy = vecy / mag;
+	}
+	
 	private boolean colision(Raqueta pRaqueta) {
 		if (posy + 2 * radio >= pRaqueta.getPosy() && posy <= pRaqueta.getPosy() + DatosJuego.ALTURA_RAQUETA) {
 			if (pRaqueta.getPosx() == DatosJuego.LIMITE_IZQ) {
 				if (posx <= DatosJuego.ANCHURA_RAQUETA) {
-					if (velx < 0) {
+					if (vecx < 0) {
 						return true;
 					}
 				}
 			} else {
 				if (posx + 2 * radio >= pRaqueta.getPosx()) {
-					if (velx > 0) {
+					if (vecx > 0) {
 						return true;
 					}
 				}
@@ -107,6 +93,33 @@ public class Pelota {
 	}
 
 	public void aumentarVelocidad() {
-		velTotal++;
+		velocidad++;
+	}
+	
+	public int getPosy() {
+		return posy;
+	}
+
+	public void comprobarModificadores() {
+		Modificador m = Juego.getJuego().buscarModificador(posx,posy);
+		if (m != null) {
+			System.out.println(m.getClass().getSimpleName());
+			switch(m.getClass().getSimpleName()) {
+			case "Acelerador":
+				System.out.println("Acelerador activado");
+				velocidad*=2;
+				break;
+			case "Freno":
+				System.out.println("Freno activado");
+				if (vecx < 0) Juego.getJuego().ralentizarJ2();
+				else Juego.getJuego().ralentizarJ1();
+				break;
+			case "Duplicador":
+				System.out.println("Duplicador activado");
+				Juego.getJuego().aniadirPelota();
+				break;
+			}
+		}
+		
 	}
 }

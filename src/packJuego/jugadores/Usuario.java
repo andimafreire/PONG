@@ -1,4 +1,4 @@
-package packJuego;
+package packJuego.jugadores;
 
 public class Usuario extends Jugador {
 
