@@ -156,7 +156,7 @@ public class Juego {
 					modificadores.getNumDuplicadores() < DatosJuego.NUM_MAX_DUPLICADORES)
 				modificadores.aniadirModificador(new Duplicador(x,y));
 
-		} else if (Math.random() > 0.2 && Math.random() < 0.6) {
+		} else if (Math.random() > 0.2 && Math.random() <= 0.6) {
 			if (modificadores.getNumAceleradores() < DatosJuego.NUM_MAX_ACELERADORES)
 				modificadores.aniadirModificador(new Acelerador(x,y));
 			

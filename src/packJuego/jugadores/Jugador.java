@@ -3,6 +3,7 @@ package packJuego.jugadores;
 import java.awt.Graphics;
 
 import packJuego.Raqueta;
+import packJuego.StopWatch;
 
 public class Jugador {
 
@@ -10,6 +11,7 @@ public class Jugador {
 	private Raqueta raqueta;
 	private int tantos;
 	private boolean ralentizar;
+	private StopWatch temporizador;
 
 	public Jugador(int pX, String pUsuario) {
 		raqueta = new Raqueta(pX);
@@ -19,6 +21,7 @@ public class Jugador {
 	}
 
 	public void update() {
+		if(temporizador != null && temporizador.elapsedTime() >= 15000) desRalentizar();
 		raqueta.update();
 	}
 
@@ -49,9 +52,11 @@ public class Jugador {
 
 	public void ralentizar() {
 		ralentizar = true;
+		temporizador = new StopWatch();
 	}
 
 	public void desRalentizar() {
 		ralentizar = false;
+		temporizador = null;
 	}
 }

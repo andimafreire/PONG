@@ -30,6 +30,7 @@ public class Reloj extends Observable implements Runnable {
 		minutos = 0;
 		segundos = 0;
 		temporizador1 = System.currentTimeMillis();
+		temporizador2 = System.currentTimeMillis();
 		while (!stopped) {
 			if (System.currentTimeMillis() - temporizador1 >= DatosJuego.FRECUENCIA_AUMENTO) {
 				Juego.getJuego().aumentarVelocidad();
