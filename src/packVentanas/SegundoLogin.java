@@ -86,7 +86,9 @@ public class SegundoLogin {
 							&& password.length() <= 30) {
 						db.register(username, password);
 						// Pasar a la ventana de opciones
-						JOptionPane.showMessageDialog(null, "Nuevo usuario registrado\nVuelve a pulsar para entrar");
+						JOptionPane.showMessageDialog(null, "Nuevo usuario registrado");
+						frame.setVisible(false);
+						VentanaJuego.empezar(usuario, username);
 					} else {
 						JOptionPane.showMessageDialog(null, "Formato incorrecto");
 					}

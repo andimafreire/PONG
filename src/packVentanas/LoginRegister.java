@@ -81,7 +81,9 @@ public class LoginRegister {
 						&& password.length() <= 30) {
 					db.register(username, password);
 					// Pasar a la ventana de opciones
-					JOptionPane.showMessageDialog(null, "Nuevo usuario registrado\nVuelve a pulsar para entrar");
+					JOptionPane.showMessageDialog(null, "Nuevo usuario registrado");
+					frame.setVisible(false);
+					MenuJuego.crear(username);
 				} else {
 					JOptionPane.showMessageDialog(null, "Formato incorrecto");
 				}
