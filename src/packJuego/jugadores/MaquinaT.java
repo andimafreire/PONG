@@ -8,9 +8,9 @@ public class MaquinaT extends Jugador {
 		super(pX, pUsuario);
 		getRaqueta().mover(-10);
 	}
-	
+
 	@Override
-	public void update(){
+	public void update() {
 		super.update();
 		if (getRaqueta().getPosy() <= 0) {
 			getRaqueta().mover(10);

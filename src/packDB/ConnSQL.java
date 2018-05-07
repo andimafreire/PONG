@@ -100,7 +100,7 @@ public class ConnSQL {
 
 		return resultado;
 	}
-	
+
 	public void addPuntuacion(String pUsername, String pRival, int pPuntos) {
 		String query = "SELECT puntos FROM sql7233144.Puntuacion WHERE jugador='" + pUsername + "';";
 		String puntos = null;
@@ -117,7 +117,10 @@ public class ConnSQL {
 
 		if (puntos != null) {
 			if (pPuntos >= Integer.parseInt(puntos)) {
-				query = "INSERT INTO sql7233144.Puntuacion VALUES ('" + pUsername + "', '" + pRival + "', '" + pPuntos + "');";
+				// query = "INSERT INTO sql7233144.Puntuacion VALUES ('" + pUsername + "', '" +
+				// pRival + "', '" + pPuntos + "');";
+				query = "UPDATE sql7233144.Puntuacion SET rival = '" + pRival + "', puntos = '" + pPuntos
+						+ "' WHERE jugador = '" + pUsername + "';";
 
 				try {
 					Statement st = this.conn.createStatement();
@@ -127,7 +130,8 @@ public class ConnSQL {
 				}
 			}
 		} else {
-			query = "INSERT INTO sql7233144.Puntuacion VALUES ('" + pUsername + "', '" + pRival + "', '" + pPuntos + "');";
+			query = "INSERT INTO sql7233144.Puntuacion VALUES ('" + pUsername + "', '" + pRival + "', '" + pPuntos
+					+ "');";
 
 			try {
 				Statement st = this.conn.createStatement();

@@ -62,9 +62,9 @@ public class Reloj extends Observable implements Runnable {
 	public void pintar(Graphics g) {
 		g.drawString(tiempo, DatosJuego.ANCHURA / 2 - g.getFontMetrics().stringWidth(tiempo) / 2, 20);
 	}
-	
+
 	public void resetearTemporizador() {
-		temporizador1 =  System.currentTimeMillis();
-		temporizador2 =  System.currentTimeMillis();
+		temporizador1 = System.currentTimeMillis();
+		temporizador2 = System.currentTimeMillis();
 	}
 }

@@ -32,7 +32,7 @@ public class Puntuaciones {
 
 		panel.setLayout(null);
 		String[][] puntuaciones = db.getRanking();
-		
+
 		for (int i = 0; i < puntuaciones[0].length; i++) {
 			JLabel ranking = new JLabel("TOP " + (i + 1) + ":   " + puntuaciones[0][i] + " (" + puntuaciones[2][i]
 					+ " puntos vs " + puntuaciones[1][i] + ")");

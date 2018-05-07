@@ -10,7 +10,7 @@ public abstract class Modificador {
 	private int posx;
 	private int posy;
 	private Color color;
-	
+
 	public Modificador(int pPosx, int pPosy) {
 		ancho = DatosJuego.ANCHURA_MODIFICADOR;
 		alto = DatosJuego.ALTURA_MODIFICADOR;
@@ -30,9 +30,9 @@ public abstract class Modificador {
 	public int getPosy() {
 		return posy;
 	}
-	
+
 	protected void setColor(Color pColor) {
 		color = pColor;
 	}
-	
+
 }

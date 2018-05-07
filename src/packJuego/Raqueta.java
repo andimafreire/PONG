@@ -6,16 +6,16 @@ public class Raqueta {
 
 	private int alto;
 	private int ancho;
-	
+
 	private int posx;
 	private int posy;
-	
+
 	private int velocidad;
 
 	public Raqueta(int pX) {
 		alto = DatosJuego.ALTURA_RAQUETA;
 		ancho = DatosJuego.ANCHURA_RAQUETA;
-		
+
 		posx = pX;
 		posy = DatosJuego.ALTURA / 2 - alto / 2;
 		velocidad = 0;
@@ -29,7 +29,7 @@ public class Raqueta {
 			posy = DatosJuego.ALTURA - alto;
 		}
 	}
-	
+
 	public void mover(int p) {
 		velocidad = p;
 	}

@@ -21,6 +21,7 @@ public class ListaModificadores {
 			modificadores.get(i).pintar(g);
 		}
 	}
+
 	public void aniadirModificador(Modificador pModificador) {
 		if (!modificadores.contains(pModificador)) {
 			modificadores.add(pModificador);
@@ -33,7 +34,7 @@ public class ListaModificadores {
 		Modificador m = null;
 		while (itr.hasNext() && !found) {
 			m = itr.next();
-			if (colision(m.getPosx(),m.getPosy(),pPosx,pPosy)) {
+			if (colision(m.getPosx(), m.getPosy(), pPosx, pPosy)) {
 				found = true;
 			}
 		}
@@ -46,10 +47,12 @@ public class ListaModificadores {
 	}
 
 	private boolean colision(int pPosxM, int pPosyM, int pPosxP, int pPosyP) {
-		if (pPosyP + 2 * DatosJuego.RADIO_PELOTA >= pPosyM && pPosyP <= pPosyM + DatosJuego.ALTURA_MODIFICADOR &&
-				pPosxP + 2 * DatosJuego.RADIO_PELOTA >= pPosxM && pPosxP <= pPosxM + DatosJuego.ANCHURA_MODIFICADOR)
-				return true;
-		else return false;
+		if (pPosyP + 2 * DatosJuego.RADIO_PELOTA >= pPosyM && pPosyP <= pPosyM + DatosJuego.ALTURA_MODIFICADOR
+				&& pPosxP + 2 * DatosJuego.RADIO_PELOTA >= pPosxM && pPosxP <= pPosxM + DatosJuego.ANCHURA_MODIFICADOR) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public boolean puedePoner(int pX, int pY) {
@@ -58,7 +61,7 @@ public class ListaModificadores {
 		Modificador m = null;
 		while (itr.hasNext() && puede) {
 			m = itr.next();
-			if (superpuesto(m.getPosx(),m.getPosy(),pX,pY)) {
+			if (superpuesto(m.getPosx(), m.getPosy(), pX, pY)) {
 				puede = false;
 			}
 		}
@@ -66,16 +69,21 @@ public class ListaModificadores {
 	}
 
 	private boolean superpuesto(int pPosxM1, int pPosyM1, int pPosxM2, int pPosyM2) {
-		if (pPosyM1 + DatosJuego.ALTURA_MODIFICADOR >= pPosyM2 && pPosyM1 <= pPosyM2 + DatosJuego.ALTURA_MODIFICADOR &&
-				pPosxM1 +  DatosJuego.ANCHURA_MODIFICADOR >= pPosxM2 && pPosxM1 <= pPosxM2 + DatosJuego.ANCHURA_MODIFICADOR)
-				return true;
-		else return false;
+		if (pPosyM1 + DatosJuego.ALTURA_MODIFICADOR >= pPosyM2 && pPosyM1 <= pPosyM2 + DatosJuego.ALTURA_MODIFICADOR
+				&& pPosxM1 + DatosJuego.ANCHURA_MODIFICADOR >= pPosxM2
+				&& pPosxM1 <= pPosxM2 + DatosJuego.ANCHURA_MODIFICADOR) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public int getNumDuplicadores() {
 		int num = 0;
 		for (int i = 0; i < modificadores.size(); i++) {
-			if (modificadores.get(i) instanceof Duplicador) num++;
+			if (modificadores.get(i) instanceof Duplicador) {
+				num++;
+			}
 		}
 		return num;
 	}
@@ -83,7 +91,9 @@ public class ListaModificadores {
 	public int getNumAceleradores() {
 		int num = 0;
 		for (int i = 0; i < modificadores.size(); i++) {
-			if (modificadores.get(i) instanceof Acelerador) num++;
+			if (modificadores.get(i) instanceof Acelerador) {
+				num++;
+			}
 		}
 		return num;
 	}

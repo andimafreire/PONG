@@ -44,7 +44,7 @@ public class VentanaJuego extends Canvas implements Runnable, KeyListener {
 	public static void end(String pUsuario, String pRival, int pTantos) {
 		int minutos = Juego.getJuego().getReloj().getMinutos();
 		int segundos = Juego.getJuego().getReloj().getSegundos();
-		
+
 		double factor;
 		switch (pRival) {
 		case "MaquinaT":
@@ -62,9 +62,9 @@ public class VentanaJuego extends Canvas implements Runnable, KeyListener {
 
 		ConnSQL db = new ConnSQL();
 		db.addPuntuacion(pUsuario, pRival, puntos);
-		
+
 		JOptionPane.showMessageDialog(null, "El ganador es " + pUsuario + "!!");
-		
+
 		Puntuaciones.crear(true);
 		stop();
 	}
@@ -119,7 +119,8 @@ public class VentanaJuego extends Canvas implements Runnable, KeyListener {
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 		int code = arg0.getKeyCode();
-		if(!Juego.getJuego().getNomJugador2().equals("MaquinaT")&&!Juego.getJuego().getNomJugador2().equals("MaquinaL")) {
+		if (!Juego.getJuego().getNomJugador2().equals("MaquinaT")
+				&& !Juego.getJuego().getNomJugador2().equals("MaquinaL")) {
 			if (code == KeyEvent.VK_W)
 				Juego.getJuego().moverJugador2(-DatosJuego.VELOCIDAD_RAQUETA);
 			if (code == KeyEvent.VK_S)
@@ -134,7 +135,8 @@ public class VentanaJuego extends Canvas implements Runnable, KeyListener {
 	@Override
 	public void keyReleased(KeyEvent arg0) {
 		int code = arg0.getKeyCode();
-		if(!Juego.getJuego().getNomJugador2().equals("MaquinaT")&&!Juego.getJuego().getNomJugador2().equals("MaquinaL")) {
+		if (!Juego.getJuego().getNomJugador2().equals("MaquinaT")
+				&& !Juego.getJuego().getNomJugador2().equals("MaquinaL")) {
 			if (code == KeyEvent.VK_W)
 				Juego.getJuego().moverJugador2(0);
 			if (code == KeyEvent.VK_S)

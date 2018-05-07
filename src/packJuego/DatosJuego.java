@@ -26,12 +26,12 @@ public class DatosJuego {
 	public static final int VELOCIDAD_INICIAL = 7;
 	public static final int NUM_MAX_PELOTAS = 2;
 	private static Color color_pelota = Color.BLACK;
-	public static final int FRECUENCIA_AUMENTO = 10000;//10 SEGUNDOS
-	
+	public static final int FRECUENCIA_AUMENTO = 10000;// 10 SEGUNDOS
+
 	// Datos de los Modificadores
 	public static final int ANCHURA_MODIFICADOR = 10;
 	public static final int ALTURA_MODIFICADOR = 20;
-	public static final int FRECUENCIA_APARICION = 5000;//5 SEGUNDOS
+	public static final int FRECUENCIA_APARICION = 5000;// 5 SEGUNDOS
 	public static final int NUM_MAX_DUPLICADORES = 1;
 	public static final Color COLOR_ACELERADOR = Color.YELLOW;
 	public static final Color COLOR_FRENO = Color.RED;
@@ -82,48 +82,6 @@ public class DatosJuego {
 		return color_pelota;
 	}
 
-	/* Detallado
-	public static void setTantosVictoria(String pTantos) {
-		switch (pTantos) {
-		case "15":
-			tantos_victoria = 15;
-			break;
-		case "16":
-			tantos_victoria = 16;
-			break;
-		case "17":
-			tantos_victoria = 17;
-			break;
-		case "18":
-			tantos_victoria = 18;
-			break;
-		case "19":
-			tantos_victoria = 19;
-			break;
-		case "20":
-			tantos_victoria = 20;
-			break;
-		case "21":
-			tantos_victoria = 21;
-			break;
-		case "22":
-			tantos_victoria = 22;
-			break;
-		case "23":
-			tantos_victoria = 23;
-			break;
-		case "24":
-			tantos_victoria = 24;
-			break;
-		case "25":
-			tantos_victoria = 25;
-			break;
-		default:
-			tantos_victoria = 22;
-			break;
-		}
-	} */
-	
 	public static void setTantosVictoria(String pTantos) {
 		switch (pTantos) {
 		case "5":

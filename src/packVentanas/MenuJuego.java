@@ -118,19 +118,12 @@ public class MenuJuego {
 		final JComboBox<String> comboBox2 = new JComboBox<String>();
 		comboBox2.setToolTipText("");
 		comboBox2.setBounds(143, 150, 89, 20);
-		/* Detallado
-		comboBox2.addItem("15");
-		comboBox2.addItem("16");
-		comboBox2.addItem("17");
-		comboBox2.addItem("18");
-		comboBox2.addItem("19");
-		comboBox2.addItem("20");
-		comboBox2.addItem("21");
-		comboBox2.addItem("22");
-		comboBox2.addItem("23");
-		comboBox2.addItem("24");
-		comboBox2.addItem("25");
-		*/
+		/*
+		 * Detallado comboBox2.addItem("15"); comboBox2.addItem("16");
+		 * comboBox2.addItem("17"); comboBox2.addItem("18"); comboBox2.addItem("19");
+		 * comboBox2.addItem("20"); comboBox2.addItem("21"); comboBox2.addItem("22");
+		 * comboBox2.addItem("23"); comboBox2.addItem("24"); comboBox2.addItem("25");
+		 */
 		comboBox2.addItem("5");
 		comboBox2.addItem("10");
 		comboBox2.addItem("15");
@@ -153,9 +146,9 @@ public class MenuJuego {
 			}
 		});
 		panel.add(btnRanking);
-		
+
 		DatosJuego.setTantosVictoria(comboBox2.getSelectedItem().toString());
 		DatosJuego.setColorPelota(comboBox.getSelectedItem().toString());
-		
+
 	}
 }

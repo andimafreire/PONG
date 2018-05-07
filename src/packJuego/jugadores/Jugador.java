@@ -21,7 +21,9 @@ public class Jugador {
 	}
 
 	public void update() {
-		if(temporizador != null && temporizador.elapsedTime() >= 15000) desRalentizar();
+		if (temporizador != null && temporizador.elapsedTime() >= 15000) {
+			desRalentizar();
+		}
 		raqueta.update();
 	}
 
@@ -30,8 +32,11 @@ public class Jugador {
 	}
 
 	public void mover(int i) {
-		if (ralentizar) raqueta.mover(i/2);
-		else raqueta.mover(i);
+		if (ralentizar) {
+			raqueta.mover(i / 2);
+		} else {
+			raqueta.mover(i);
+		}
 	}
 
 	public void sumarTanto() {
