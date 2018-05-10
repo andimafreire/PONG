@@ -54,6 +54,10 @@ public class Jugador {
 	public String getNombre() {
 		return usuario;
 	}
+	
+	public int getVelRaqueta(){
+		return raqueta.getVelocidad();
+	}
 
 	public void ralentizar() {
 		ralentizar = true;

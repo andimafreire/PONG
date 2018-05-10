@@ -41,12 +41,12 @@ public class VentanaJuego extends Canvas implements Runnable, KeyListener {
 		juego.start();
 	}
 
-	public static void end(String pUsuario, String pRival, int pTantos) {
+	public static void end(String pGanador, String pPerdedor, int pTantos) {
 		int minutos = Juego.getJuego().getReloj().getMinutos();
 		int segundos = Juego.getJuego().getReloj().getSegundos();
 
 		double factor;
-		switch (pRival) {
+		switch (pPerdedor) {
 		case "MaquinaT":
 			factor = 0.50;
 			break;
@@ -59,11 +59,11 @@ public class VentanaJuego extends Canvas implements Runnable, KeyListener {
 		}
 
 		int puntos = (int) ((pTantos * 1000 - minutos * 600 - segundos * 60) * factor);
-
-		ConnSQL db = new ConnSQL();
-		db.addPuntuacion(pUsuario, pRival, puntos);
-
-		JOptionPane.showMessageDialog(null, "El ganador es " + pUsuario + "!!");
+		if (!pGanador.equals("MaquinaT") && !pGanador.equals("MaquinaL")) {
+			ConnSQL db = new ConnSQL();
+			db.addPuntuacion(pGanador, pPerdedor, puntos);
+		}
+		JOptionPane.showMessageDialog(null, "El ganador es " + pGanador + "!!");
 
 		Puntuaciones.crear(true);
 		stop();

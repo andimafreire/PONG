@@ -139,6 +139,14 @@ public class Juego {
 	public void ralentizarJ2() {
 		jugador2.ralentizar();
 	}
+	
+	public Jugador getJugador1() {
+		return jugador1;
+	}
+	
+	public Jugador getJugador2() {
+		return jugador2;
+	}
 
 	public void ralentizarJ1() {
 		jugador1.ralentizar();

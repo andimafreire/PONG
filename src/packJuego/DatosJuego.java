@@ -33,9 +33,9 @@ public class DatosJuego {
 	public static final int ALTURA_MODIFICADOR = 20;
 	public static final int FRECUENCIA_APARICION = 5000;// 5 SEGUNDOS
 	public static final int NUM_MAX_DUPLICADORES = 1;
-	public static final Color COLOR_ACELERADOR = Color.YELLOW;
+	public static final Color COLOR_ACELERADOR = Color.GREEN;
 	public static final Color COLOR_FRENO = Color.RED;
-	public static final Color COLOR_DUPLICADOR = Color.ORANGE;
+	public static final Color COLOR_DUPLICADOR = Color.BLUE;
 	public static final int NUM_MAX_ACELERADORES = 3;
 
 	private DatosJuego() {}

@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class ConnSQL {
 
-	// Don't touch anything or our ninja frog will annihilate you
+	// GitHub Users: Don't touch anything or our ninja frog will annihilate you
 	private String url = "jdbc:mysql://sql7.freesqldatabase.com:3306/";
 	private String user = "sql7233144";
 	private String passwd = "w3sZdbyXe2";

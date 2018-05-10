@@ -98,6 +98,14 @@ public class Pelota {
 	public int getPosy() {
 		return posy.intValue();
 	}
+	
+	public int getPosx() {
+		return posx.intValue();
+	}
+	
+	public double getVecX(){
+		return vecx;
+	}
 
 	public void comprobarModificadores() {
 		Modificador m = Juego.getJuego().buscarModificador(posx.intValue(), posy.intValue());
